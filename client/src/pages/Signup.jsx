@@ -35,7 +35,7 @@ export default function Signup() {
       }
       setLoading(false);
       if (res.ok) {
-        navigate("/sign-in");
+        navigate("/signin");
       }
     } catch (error) {
       setErrorMessage(error.Message);
@@ -108,7 +108,7 @@ export default function Signup() {
           </form>
           <div className="flex gap-2 mt-5 text-sm">
             <span>Already have account? </span>
-            <Link to="/sign-in" className="text-blue-500">
+            <Link to="/signin" className="text-blue-500">
               Sign In
             </Link>
           </div>

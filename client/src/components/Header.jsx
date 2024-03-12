@@ -1,11 +1,22 @@
-import { Navbar, TextInput, Button } from "flowbite-react";
+import {
+  Navbar,
+  TextInput,
+  Button,
+  Dropdown,
+  Avatar,
+  DropdownHeader,
+  DropdownItem,
+  DropdownDivider,
+} from "flowbite-react";
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import { AiOutlineSearch } from "react-icons/ai";
 import { FaMoon } from "react-icons/fa";
+import { useSelector } from "react-redux";
 
 export default function Header() {
   const path = useLocation().pathname;
+  const { currentUser } = useSelector((state) => state.user);
   return (
     <Navbar className="border-b-2">
       <Link
@@ -32,11 +43,37 @@ export default function Header() {
         <Button className="w-12 h-10 hidden sm:inline " color="gray" pill>
           <FaMoon />
         </Button>
-        <Link to="/Signin">
-          <Button gradientDuoTone="purpleToBlue" outline>
-            Sign In
-          </Button>
-        </Link>
+
+        {/* If the current User exists then we have to show the drop down and the image of the user */}
+
+        {currentUser ? (
+          <Dropdown
+            arrowIcon={false}
+            inline
+            label={
+              <Avatar alt="user" img={currentUser.profilePicture} rounded />
+            }
+          >
+            <Dropdown.Header>
+              <span className="block text-sm">@{currentUser.username}</span>
+              <span className="block text-sm  font-medium truncate">
+                {currentUser.email}
+              </span>
+            </Dropdown.Header>
+            <Link to={"/dashboard?tab=profile"}>
+              <DropdownItem> Profile</DropdownItem>
+            </Link>
+            <DropdownDivider />
+            <DropdownItem>Sign out</DropdownItem>
+          </Dropdown>
+        ) : (
+          <Link to="/Signin">
+            <Button gradientDuoTone="purpleToBlue" outline>
+              SignIn
+            </Button>
+          </Link>
+        )}
+
         <Navbar.Toggle />
       </div>
       <Navbar.Collapse>
