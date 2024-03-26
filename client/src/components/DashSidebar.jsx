@@ -1,10 +1,10 @@
 import { Sidebar } from "flowbite-react";
-import { HiUser, HiArrowSmRight } from "react-icons/hi";
+import { HiDocumentText, HiUser, HiArrowSmRight } from "react-icons/hi";
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { signoutSuccess } from "../redux/user/userSlice";
 import { useDispatch } from "react-redux";
-import { UseSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { current } from "@reduxjs/toolkit";
 export default function DashSidebar() {
   const location = useLocation();
@@ -59,7 +59,7 @@ export default function DashSidebar() {
               </Sidebar.Item>
             </Link>
           )}
-          ;
+
           <Sidebar.Item
             icon={HiArrowSmRight}
             className="cursor-pointer"
